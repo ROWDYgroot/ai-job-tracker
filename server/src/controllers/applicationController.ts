@@ -18,12 +18,36 @@ export const createApplication = async (req: Request, res: Response) => {
   }
 };
 
+// export const getApplication = async (req: Request, res: Response) => {
+//   try {
+//     const { userId } = req.query;
+
+//     const applications = await Application.find({ userId });
+//     // console.log("applications", applications);
+
+//     return res.status(200).json({
+//       message: "Below is the list",
+//       applications,
+//     });
+//   } catch (error) {
+//     console.log("Failed due to", error);
+//     return res.status(500).json({
+//       message: "Internal Sever Error",
+//     });
+//   }
+// };
+
 export const getApplication = async (req: Request, res: Response) => {
   try {
     const { userId } = req.query;
 
+    if (typeof userId !== "string") {
+      return res.status(400).json({
+        message: "Invalid userId",
+      });
+    }
+
     const applications = await Application.find({ userId });
-    // console.log("applications", applications);
 
     return res.status(200).json({
       message: "Below is the list",
@@ -31,8 +55,9 @@ export const getApplication = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log("Failed due to", error);
+
     return res.status(500).json({
-      message: "Internal Sever Error",
+      message: "Internal Server Error",
     });
   }
 };
