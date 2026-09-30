@@ -9,6 +9,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const { login } = useAuth();
 
@@ -23,6 +24,10 @@ const Login = () => {
     const value = e.target.value;
     setPassword(value);
   };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
 
   console.log("email", email);
   console.log("password", password);
@@ -129,13 +134,14 @@ const Login = () => {
 
               <input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Enter your password"
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
                 required
               />
+              {showPassword ? <span onClick={handleShowPassword}>Hide</span> : <span onClick={handleShowPassword}>Show</span>}
               {passwordError && (
                 <p className="mt-1 text-sm font-medium text-red-600">
                   {passwordError}

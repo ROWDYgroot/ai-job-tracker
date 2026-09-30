@@ -6,10 +6,10 @@ interface User {
   email: string;
 }
 
-interface StoredUser {
-  email: string;
-  password: string;
-}
+// interface StoredUser {
+//   email: string;
+//   password: string;
+// }
 
 interface AuthContextType {
   user: User | null;

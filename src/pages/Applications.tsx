@@ -5,7 +5,7 @@ import ApplicationFilter from "../components/Applications/ApplicationFilter";
 import ApplicationModal from "../components/Applications/ApplicationModal";
 import type { Application } from "../types/application";
 import { useApplications } from "../context/ApplicationContext";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 
 const Applications = () => {
@@ -17,7 +17,7 @@ const Applications = () => {
   const [selected, setSelected] = useState("ALL");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
   // const resultForUser = applications.filter((prev) => prev.userId === user?.email);
 
   const searchResult = applications.filter((res) =>

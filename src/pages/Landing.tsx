@@ -1,4 +1,4 @@
-import FeatureCard from "../components/Features/FeatureCard"
+// import FeatureCard from "../components/Features/FeatureCard"
 import Features from "../components/Features/Features"
 import Footer from "../components/Footer"
 import Hero from "../components/Hero"

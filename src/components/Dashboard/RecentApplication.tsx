@@ -39,7 +39,7 @@ const RecentApplication = () => {
       <div className="divide-y divide-gray-100">
         {latestApplication.map((app) => (
           <div
-            key={app.id}
+            key={app._id}
             className="flex flex-col gap-4 py-5 transition first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between"
           >
             {/* Company + Role */}
