@@ -42,7 +42,7 @@ const genAI = new GoogleGenerativeAI(
 );
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
 });
 
 export const analyzeResumeWithAI = async (
