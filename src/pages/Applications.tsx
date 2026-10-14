@@ -5,12 +5,16 @@ import ApplicationFilter from "../components/Applications/ApplicationFilter";
 import ApplicationModal from "../components/Applications/ApplicationModal";
 import type { Application } from "../types/application";
 import { useApplications } from "../context/ApplicationContext";
+import ApplicationDetails from "../components/Applications/ApplicationDetails";
 // import { useAuth } from "../context/AuthContext";
 
 
 const Applications = () => {
   const { applications, addApplication, deleteApplication, updateApplication } = useApplications();
   const [editingApplication, setEditingApplication] =
+    useState<Application | null>(null);
+
+  const [selectedApplication, setSelectedApplication] =
     useState<Application | null>(null);
 
   const [search, setSearch] = useState("");
@@ -42,6 +46,13 @@ const Applications = () => {
   //     setIsModalOpen(false);
   //   }
   // };
+  const handleDetails = (id: string) => {
+    const app = applications.find((item) => item._id === id);
+
+    if (app) {
+      setSelectedApplication(app);
+    }
+  };
 
   const handleDelete = (id: string) => {
     deleteApplication(id);
@@ -160,6 +171,7 @@ const Applications = () => {
                   status={data.status}
                   onDelete={handleDelete}
                   onEdit={handleEdit}
+                  onDetails={handleDetails}
                 />
               ))}
             </div>
@@ -202,6 +214,12 @@ const Applications = () => {
           onSubmit={
             editingApplication ? handleUpdateApplication : handleAddApplication
           }
+        />
+      )}
+      {selectedApplication && (
+        <ApplicationDetails
+          application={selectedApplication}
+          onClose={() => setSelectedApplication(null)}
         />
       )}
     </main>
