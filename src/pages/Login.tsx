@@ -27,7 +27,7 @@ const Login = () => {
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
-  }
+  };
 
   console.log("email", email);
   console.log("password", password);
@@ -59,24 +59,27 @@ const Login = () => {
     }
 
     if (isValid) {
-      const success = await login(email, password);
+      try {
+        const success = await login(email, password);
 
-    if (!success) {
-      setLoginError("Invalid email or password");
-      return;
-    }
+        if (!success) {
+          setLoginError("Invalid email or password");
+          return;
+        }
 
-    navigate("/dashboard");
+        navigate("/dashboard");
+      } catch {
+        setLoginError("Unable to log in. Please try again.");
+      }
+      navigate("/dashboard");
     }
   };
 
   return (
     <main className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-gradient-to-br from-purple-50 via-white to-purple-50 px-6 py-12">
       <div className="w-full max-w-md">
-
         {/* Login Card */}
         <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-xl sm:p-10">
-
           {/* Header */}
           <div className="text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-purple-100 text-2xl">
@@ -97,7 +100,6 @@ const Login = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-
             {/* Email */}
             <div>
               <label
@@ -122,7 +124,6 @@ const Login = () => {
                 </p>
               )}
             </div>
-
             {/* Password */}
             <div>
               <label
@@ -132,26 +133,35 @@ const Login = () => {
                 Password
               </label>
 
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={handlePasswordChange}
-                placeholder="Enter your password"
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
-                required
-              />
-              {showPassword ? <span onClick={handleShowPassword}>Hide</span> : <span onClick={handleShowPassword}>Show</span>}
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={handlePasswordChange}
+                  placeholder="Enter your password"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 pr-16 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
+                  required
+                />
+
+                <button
+                  type="button"
+                  onClick={handleShowPassword}
+                  className="absolute inset-y-0 right-4 flex items-center text-sm font-semibold text-purple-600 transition hover:text-purple-800 focus:outline-none"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+
               {passwordError && (
                 <p className="mt-1 text-sm font-medium text-red-600">
                   {passwordError}
                 </p>
               )}
             </div>
-
             {/* Remember + Forgot Password */}
-            <div className="flex items-center justify-between">
-
+            {/* <div className="flex items-center justify-between">
               <label className="flex cursor-pointer items-center gap-2">
                 <input
                   type="checkbox"
@@ -160,9 +170,7 @@ const Login = () => {
                   className="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
                 />
 
-                <span className="text-sm text-gray-600">
-                  Remember me
-                </span>
+                <span className="text-sm text-gray-600">Remember me</span>
               </label>
 
               <button
@@ -172,8 +180,7 @@ const Login = () => {
               >
                 Forgot password?
               </button>
-
-            </div>
+            </div> */}
 
             {/* Sign In */}
             {loginError && (
@@ -203,9 +210,7 @@ const Login = () => {
               Create an account
             </button>
           </div>
-
         </div>
-
       </div>
     </main>
   );

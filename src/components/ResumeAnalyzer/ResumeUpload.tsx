@@ -7,10 +7,10 @@ interface ResumeUploadProps {
 
 const ResumeUpload = ({ file, setFile }: ResumeUploadProps) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex w-full min-w-0 flex-col gap-3">
       <label
         htmlFor="file-upload"
-        className="text-sm font-medium text-gray-700"
+        className="text-sm font-medium text-slate-300"
       >
         Choose a file:
       </label>
@@ -19,12 +19,16 @@ const ResumeUpload = ({ file, setFile }: ResumeUploadProps) => {
         type="file"
         id="file-upload"
         name="file-upload"
-        accept=".pdf"
-        className="rounded-md border border-gray-300 p-2 text-sm"
+        accept=".pdf,application/pdf"
+        className="block w-full min-w-0 max-w-full cursor-pointer rounded-xl border border-white/15 bg-slate-900/70 p-2 text-sm text-slate-200 file:mr-2 file:rounded-lg file:border-0 file:bg-purple-500/20 file:px-3 file:py-2 file:text-sm file:font-medium file:text-purple-300"
         onChange={(e) => setFile(e.target.files?.[0] ?? null)}
       />
 
-      {file && <p className="text-sm text-gray-600">{file.name}</p>}
+      {file && (
+        <p className="break-all text-sm text-emerald-300">
+          Selected: {file.name}
+        </p>
+      )}
     </div>
   );
 };

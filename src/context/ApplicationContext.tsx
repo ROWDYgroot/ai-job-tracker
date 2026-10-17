@@ -111,7 +111,7 @@ interface ApplicationProviderProps {
   children: ReactNode;
 }
 
-const API_URL = "http://localhost:5000/api/application";
+const API_URL = "https://ai-job-tracker-backend-ujlt.onrender.com/api/application";
 
 export const ApplicationProvider = ({
   children,

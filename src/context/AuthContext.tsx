@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     password: string,
   ): Promise<boolean> => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch("https://ai-job-tracker-backend-ujlt.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   //Login using api call
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("https://ai-job-tracker-backend-ujlt.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

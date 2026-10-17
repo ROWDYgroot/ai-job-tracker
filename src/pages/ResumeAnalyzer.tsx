@@ -1,122 +1,3 @@
-// import { useState } from "react";
-// import ResumeUpload from "../components/ResumeAnalyzer/ResumeUpload";
-// interface ResumeAnalysis {
-//   score: number;
-//   matchedSkills: string[];
-//   missingSkills: string[];
-//   strengths: string[];
-//   weaknesses: string[];
-//   suggestions: string[];
-// }
-
-// const ResumeAnalyzer = () => {
-//   const [file, setFile] = useState<File | null>(null);
-//   const [desc, setDesc] = useState("");
-//   const [error, setError] = useState("");
-//   const [analysis, setAnalysis] = useState<ResumeAnalysis | null>(null);
-
-//   const handleAnalyze = async () => {
-//     setError("");
-//     if (!file) {
-//       setError("Please select a file before moving forward");
-//       return;
-//     }
-//     const formData = new FormData();
-//     formData.append("resume", file);
-//     formData.append("jobDescription", desc);
-//     const response = await fetch("http://localhost:5000/api/resume/analyze", {
-//       method: "POST",
-//       body: formData,
-//     });
-
-//     const data = await response.json();
-//     setAnalysis(data.analysis);
-//     console.log("Analyze response:", data);
-//     console.log("Analysis:", data.analysis);
-//     console.log("Analysis type:", typeof data.analysis);
-//   };
-
-//   return (
-//     <div className="mx-auto flex max-w-md flex-col gap-6 p-6">
-//       <h1 className="text-2xl font-bold text-gray-800">Resume Analyzer</h1>
-
-//       <ResumeUpload file={file} setFile={setFile} />
-//       <div>
-//         <label
-//           htmlFor="description"
-//           className="mb-2 block text-sm font-semibold text-gray-700"
-//         >
-//           Job Description
-//         </label>
-
-//         <textarea
-//           id="description"
-//           placeholder="Paste or enter the job description..."
-//           value={desc}
-//           onChange={(e) => setDesc(e.target.value)}
-//           rows={5}
-//           className="w-full resize-y rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-purple-500 focus:ring-4 focus:ring-purple-100"
-//           required
-//         />
-//       </div>
-
-//       <button
-//         onClick={handleAnalyze}
-//         className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-//       >
-//         Analyze
-//       </button>
-//       {error && (
-//         <p className="mt-1 text-sm font-medium text-red-600">{error}</p>
-//       )}
-//       {analysis && (
-//         <div>
-//           <h2>Resume Analysis</h2>
-
-//           <h3>Score: {analysis.score}/100</h3>
-
-//           <h3>Matched Skills</h3>
-//           <ul>
-//             {analysis.matchedSkills.map((skill) => (
-//               <li key={skill}>{skill}</li>
-//             ))}
-//           </ul>
-
-//           <h3>Missing Skills</h3>
-//           <ul>
-//             {analysis.missingSkills.map((skill) => (
-//               <li key={skill}>{skill}</li>
-//             ))}
-//           </ul>
-
-//           <h3>Strengths</h3>
-//           <ul>
-//             {analysis.strengths.map((strength) => (
-//               <li key={strength}>{strength}</li>
-//             ))}
-//           </ul>
-
-//           <h3>Weaknesses</h3>
-//           <ul>
-//             {analysis.weaknesses.map((weakness) => (
-//               <li key={weakness}>{weakness}</li>
-//             ))}
-//           </ul>
-
-//           <h3>Suggestions</h3>
-//           <ul>
-//             {analysis.suggestions.map((suggestion) => (
-//               <li key={suggestion}>{suggestion}</li>
-//             ))}
-//           </ul>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ResumeAnalyzer;
-
 import { useState } from "react";
 import ResumeUpload from "../components/ResumeAnalyzer/ResumeUpload";
 
@@ -157,7 +38,7 @@ const ResumeAnalyzer = () => {
       formData.append("resume", file);
       formData.append("jobDescription", desc);
 
-      const response = await fetch("http://localhost:5000/api/resume/analyze", {
+      const response = await fetch("https://ai-job-tracker-backend-ujlt.onrender.com/api/resume/analyze", {
         method: "POST",
         body: formData,
       });
@@ -190,14 +71,14 @@ const ResumeAnalyzer = () => {
         : "#ef4444";
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-10">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-clip bg-slate-950 px-3 py-6 text-white sm:px-6 sm:py-10 lg:px-10">
       {/* Background Glow */}
       <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-purple-600/20 blur-3xl" />
         <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto w-full min-w-0 max-w-6xl">
         {/* Header */}
         <div className="mb-10 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-400/20 bg-purple-500/10 px-4 py-2 text-sm text-purple-300">
@@ -219,9 +100,9 @@ const ResumeAnalyzer = () => {
         </div>
 
         {/* Input Section */}
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid w-full min-w-0 grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           {/* Resume Upload Card */}
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-8">
+          <div className="w-full min-w-0 rounded-3xl border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-8">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-purple-500/15 text-xl">
                 📄
@@ -255,7 +136,7 @@ const ResumeAnalyzer = () => {
           </div>
 
           {/* Job Description Card */}
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-8">
+          <div className="w-full min-w-0 rounded-3xl border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-8">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/15 text-xl">
                 💼
